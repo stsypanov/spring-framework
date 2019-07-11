@@ -471,8 +471,8 @@ public class PropertyEditorRegistrySupport implements PropertyEditorRegistry {
 					int pos = PropertyAccessorUtils.getFirstNestedPropertySeparatorIndex(editorPath);
 					if (pos != -1) {
 						String editorNestedProperty = editorPath.substring(0, pos);
-						String editorNestedPath = editorPath.substring(pos + 1);
 						if (editorNestedProperty.equals(nestedProperty) || editorNestedProperty.equals(actualPropertyName)) {
+							String editorNestedPath = editorPath.substring(pos + 1);
 							target.registerCustomEditor(
 									editorHolder.getRegisteredType(), editorNestedPath, editorHolder.getPropertyEditor());
 						}

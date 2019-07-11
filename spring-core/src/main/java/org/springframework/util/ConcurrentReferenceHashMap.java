@@ -371,19 +371,6 @@ public class ConcurrentReferenceHashMap<K, V> extends AbstractMap<K, V> implemen
 		}
 	}
 
-	/**
-	 * Remove any entries that have been garbage collected and are no longer referenced.
-	 * Under normal circumstances garbage collected entries are automatically purged as
-	 * items are added or removed from the Map. This method can be used to force a purge,
-	 * and is useful when the Map is read frequently but updated less often.
-	 */
-	public void purgeUnreferencedEntries() {
-		for (Segment segment : this.segments) {
-			segment.restructureIfNecessary(false);
-		}
-	}
-
-
 	@Override
 	public int size() {
 		int size = 0;

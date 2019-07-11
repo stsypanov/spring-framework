@@ -30,6 +30,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.IdentityHashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.StringJoiner;
 
 import org.springframework.core.SerializableTypeWrapper.FieldTypeProvider;
@@ -91,8 +92,8 @@ public class ResolvableType implements Serializable {
 
 	private static final ResolvableType[] EMPTY_TYPES_ARRAY = new ResolvableType[0];
 
-	private static final ConcurrentReferenceHashMap<ResolvableType, ResolvableType> cache =
-			new ConcurrentReferenceHashMap<>(256);
+	private static final ConcurrentHashMap<ResolvableType, ResolvableType> cache =
+			new ConcurrentHashMap<>(256);
 
 
 	/**
@@ -1407,9 +1408,6 @@ public class ResolvableType implements Serializable {
 		if (type instanceof Class) {
 			return new ResolvableType(type, typeProvider, variableResolver, (ResolvableType) null);
 		}
-
-		// Purge empty entries on access since we don't have a clean-up thread or the like.
-		cache.purgeUnreferencedEntries();
 
 		// Check the cache - we may have a ResolvableType which has been resolved before...
 		ResolvableType resultType = new ResolvableType(type, typeProvider, variableResolver);
