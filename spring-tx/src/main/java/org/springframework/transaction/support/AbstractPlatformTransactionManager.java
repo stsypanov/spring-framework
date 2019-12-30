@@ -1240,8 +1240,10 @@ public abstract class AbstractPlatformTransactionManager implements PlatformTran
 	protected void registerAfterCompletionWithExistingTransaction(
 			Object transaction, List<TransactionSynchronization> synchronizations) throws TransactionException {
 
-		logger.debug("Cannot register Spring after-completion synchronization with existing transaction - " +
-				"processing Spring after-completion callbacks immediately, with outcome status 'unknown'");
+		if (logger.isDebugEnabled()) {
+			logger.debug("Cannot register Spring after-completion synchronization with existing transaction - " +
+					"processing Spring after-completion callbacks immediately, with outcome status 'unknown'");
+		}
 		invokeAfterCompletion(synchronizations, TransactionSynchronization.STATUS_UNKNOWN);
 	}
 

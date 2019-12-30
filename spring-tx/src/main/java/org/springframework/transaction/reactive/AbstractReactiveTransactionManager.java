@@ -886,8 +886,10 @@ public abstract class AbstractReactiveTransactionManager implements ReactiveTran
 	protected Mono<Void> registerAfterCompletionWithExistingTransaction(TransactionSynchronizationManager synchronizationManager,
 			Object transaction, List<TransactionSynchronization> synchronizations) throws TransactionException {
 
-		logger.debug("Cannot register Spring after-completion synchronization with existing transaction - " +
-				"processing Spring after-completion callbacks immediately, with outcome status 'unknown'");
+		if (logger.isDebugEnabled()) {
+			logger.debug("Cannot register Spring after-completion synchronization with existing transaction - " +
+					"processing Spring after-completion callbacks immediately, with outcome status 'unknown'");
+		}
 		return invokeAfterCompletion(synchronizationManager, synchronizations, TransactionSynchronization.STATUS_UNKNOWN);
 	}
 
