@@ -469,7 +469,7 @@ final class TypeMappedAnnotation<A extends Annotation> extends AbstractMergedAnn
 			value = ClassUtils.resolveClassName((String) value, getClassLoader());
 		}
 		else if (value instanceof Class[] && type == String[].class) {
-			Class<?>[] classes = (Class[]) value;
+			Class<?>[] classes = (Class<?>[]) value;
 			String[] names = new String[classes.length];
 			for (int i = 0; i < classes.length; i++) {
 				names[i] = classes[i].getName();

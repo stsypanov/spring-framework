@@ -24,8 +24,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.function.UnaryOperator;
 
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
@@ -402,7 +402,7 @@ public class ScriptTemplateView extends AbstractUrlBasedView {
 			Assert.state(url != null, "'url' not set");
 			String template = getTemplate(url);
 
-			Function<String, String> templateLoader = path -> {
+			UnaryOperator<String> templateLoader = path -> {
 				try {
 					return getTemplate(path);
 				}
