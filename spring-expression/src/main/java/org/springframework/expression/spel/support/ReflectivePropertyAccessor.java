@@ -611,8 +611,8 @@ public class ReflectivePropertyAccessor implements PropertyAccessor {
 				return false;
 			}
 			PropertyCacheKey otherKey = (PropertyCacheKey) other;
-			return (this.clazz == otherKey.clazz && this.property.equals(otherKey.property) &&
-					this.targetIsClass == otherKey.targetIsClass);
+			return this.clazz == otherKey.clazz && this.targetIsClass == otherKey.targetIsClass &&
+					this.property.equals(otherKey.property);
 		}
 
 		@Override

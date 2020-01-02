@@ -119,10 +119,10 @@ public class ResourceUrlEncodingFilter extends GenericFilterBean {
 			}
 			if (this.indexLookupPath != null && url.startsWith(this.prefixLookupPath)) {
 				int suffixIndex = getEndPathIndex(url);
-				String suffix = url.substring(suffixIndex);
 				String lookupPath = url.substring(this.indexLookupPath, suffixIndex);
 				lookupPath = this.resourceUrlProvider.getForLookupPath(lookupPath);
 				if (lookupPath != null) {
+					String suffix = url.substring(suffixIndex);
 					return this.prefixLookupPath + lookupPath + suffix;
 				}
 			}
