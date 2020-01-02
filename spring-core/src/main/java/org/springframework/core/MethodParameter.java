@@ -27,6 +27,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -60,7 +61,7 @@ import org.springframework.util.ObjectUtils;
  */
 public class MethodParameter {
 
-	private static final Annotation[] EMPTY_ANNOTATION_ARRAY = new Annotation[0];
+	private static final Annotation[] EMPTY_ANNOTATION_ARRAY = {};
 
 
 	private final Executable executable;
@@ -837,14 +838,7 @@ public class MethodParameter {
 		Parameter[] allParams = executable.getParameters();
 		// Try first with identity checks for greater performance.
 		for (int i = 0; i < allParams.length; i++) {
-			if (parameter == allParams[i]) {
-				return i;
-			}
-		}
-		// Potentially try again with object equality checks in order to avoid race
-		// conditions while invoking java.lang.reflect.Executable.getParameters().
-		for (int i = 0; i < allParams.length; i++) {
-			if (parameter.equals(allParams[i])) {
+			if (Objects.equals(parameter, allParams[i])) {
 				return i;
 			}
 		}

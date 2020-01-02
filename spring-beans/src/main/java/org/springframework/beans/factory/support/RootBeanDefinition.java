@@ -328,8 +328,9 @@ public class RootBeanDefinition extends AbstractBeanDefinition {
 	 */
 	@Nullable
 	public Class<?> getTargetType() {
-		if (this.resolvedTargetType != null) {
-			return this.resolvedTargetType;
+		Class<?> resolvedTargetType = this.resolvedTargetType;
+		if (resolvedTargetType != null) {
+			return resolvedTargetType;
 		}
 		ResolvableType targetType = this.targetType;
 		return (targetType != null ? targetType.resolve() : null);
